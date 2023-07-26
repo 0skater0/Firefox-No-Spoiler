@@ -2,7 +2,7 @@
   "description": "Hide YouTube video time and progress bar for a distraction and spoiler -free viewing experience. Enhance focus with this Firefox extension. Simple and effective.",
   "manifest_version": 2,
   "name": "No Spoilers: Youtube",
-  "version": "0.1",
+  "version": "0.2",
   "homepage_url": "https://github.com/0skater0/Firefox-No-Spoiler",
   "icons": {
     "128": "icons/YouTube-No-Spoiler-On.png"

@@ -1,23 +1,41 @@
 const injectCss = `
-#secondary, #info, #masthead-container, #chat, #related, #comments, .ytp-progress-bar-container, .ytp-time-display, ytd-thumbnail-overlay-time-status-renderer {
+/* Ausblenden der Elemente */
+#secondary, #info, #chat, #comments, #bottom-row, .ytp-ce-top-left-quad, .ytp-ce-top-right-quad, .ytp-progress-bar-container, .ytp-time-display, .ytp-cued-thumbnail-overlay-image, ytd-thumbnail-overlay-time-status-renderer {
   display: none !important;
 }
-.ytp-player-content, .ytp-ce-element {
-  display: none !important;
+
+/* Anzeigen des Videocontainers */
+#player-container-id {
+  display: flex !important;
+  flex-wrap: wrap !important;
 }
-.html5-video-container, .html5-main-video {
+
+/* Video und Beschreibung */
+#movie_player, #meta, #meta-contents {
+  flex: 1 1 100% !important;
+}
+
+/* Video auf volle Breite */
+#player-container-id .html5-video-container, #player-container-id .html5-main-video {
   width: 100% !important;
   height: 100% !important;
 }
-.ytp-cued-thumbnail-overlay-image {
-  z-index: 11;
-}
+
+/* Steuerelemente und untere Leiste anzeigen */
 .ytp-chrome-controls, .ytp-chrome-bottom {
-  left: 0 !important;
-  width: 100% !important;
+  display: block !important;
 }
-#page-manager.ytd-app {
-  margin-top: 0 !important;
+
+/* Anzeigen der Videoempfehlungen (optional) */
+#related {
+  display: block !important;
+  flex: 1 1 100% !important;
+  max-width: 100% !important;
+}
+
+/* Videoempfehlungen rechts vom Video anzeigen (optional) */
+#player-container-id .ytp-endscreen-content {
+  display: flex !important;
 }
 `;
 
