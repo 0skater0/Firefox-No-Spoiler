@@ -8,11 +8,6 @@
     "128": "icons/YouTube-No-Spoiler-On.png"
   },
 
-  "options_ui": {
-    "page": "Firefox-No-Spoiler-Options.html",
-    "open_in_tab": true
-  },
-
   "permissions": [
     "*://*.youtube.com/*",
     "*://youtube.com/*",
