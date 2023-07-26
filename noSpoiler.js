@@ -1,39 +1,39 @@
 const injectCss = `
-/* Ausblenden der Elemente */
+/* Hide the elements */
 #secondary, #info, #chat, #comments, #bottom-row, .ytp-ce-top-left-quad, .ytp-ce-top-right-quad, .ytp-progress-bar-container, .ytp-time-display, .ytp-cued-thumbnail-overlay-image, ytd-thumbnail-overlay-time-status-renderer {
   display: none !important;
 }
 
-/* Anzeigen des Videocontainers */
+/* View the video container */
 #player-container-id {
   display: flex !important;
   flex-wrap: wrap !important;
 }
 
-/* Video und Beschreibung */
+/* video and description */
 #movie_player, #meta, #meta-contents {
   flex: 1 1 100% !important;
 }
 
-/* Video auf volle Breite */
+/* Full width video */
 #player-container-id .html5-video-container, #player-container-id .html5-main-video {
   width: 100% !important;
   height: 100% !important;
 }
 
-/* Steuerelemente und untere Leiste anzeigen */
+/* Show controls and bottom bar */
 .ytp-chrome-controls, .ytp-chrome-bottom {
   display: block !important;
 }
 
-/* Anzeigen der Videoempfehlungen (optional) */
+/* View the video recommendations (optional) */
 #related {
   display: block !important;
   flex: 1 1 100% !important;
   max-width: 100% !important;
 }
 
-/* Videoempfehlungen rechts vom Video anzeigen (optional) */
+/* Show video recommendations to the right of the video (optional) */
 #player-container-id .ytp-endscreen-content {
   display: flex !important;
 }
@@ -68,7 +68,7 @@ async function deactivate() {
 }
 
 async function applyCSS() {
-    active = await isActive();
+    var active = await isActive();
     if (active) {
         activate();
     } else {

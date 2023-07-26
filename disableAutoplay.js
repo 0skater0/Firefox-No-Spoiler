@@ -1,4 +1,4 @@
-// Funktion zum Deaktivieren des Autoplay auf YouTube
+// Function to disable autoplay on YouTube
 function disableYouTubeAutoplay() {
     const videos = document.querySelectorAll("video");
     videos.forEach((video) => {
@@ -6,7 +6,7 @@ function disableYouTubeAutoplay() {
     });
 }
 
-// Funktion zum Aktivieren des Autoplay auf YouTube
+// Function to enable autoplay on YouTube
 function enableYouTubeAutoplay() {
     const videos = document.querySelectorAll("video");
     videos.forEach((video) => {
@@ -14,7 +14,7 @@ function enableYouTubeAutoplay() {
     });
 }
 
-// Funktion zum Überprüfen des Werts von YouTubeNoSpoilersActive
+// Function to check the value of YouTubeNoSpoilersActive
 function checkYouTubeNoSpoilersActive() {
     browser.storage.local
         .get("YouTubeNoSpoilersActive")
@@ -27,11 +27,11 @@ function checkYouTubeNoSpoilersActive() {
             }
         })
         .catch((error) => {
-            console.error("Fehler beim Lesen von browser.storage.local: ", error);
+            console.error("Error reading browser.storage.local: ", error);
         });
 }
 
-// Führe die Funktion aus, wenn die Seite geladen ist
+// Execute the function when the page is loaded
 window.addEventListener("load", () => {
     checkYouTubeNoSpoilersActive();
 });
