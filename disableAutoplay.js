@@ -1,37 +1,29 @@
-// Function to disable autoplay on YouTube
-function disableYouTubeAutoplay() {
-    const videos = document.querySelectorAll("video");
-    videos.forEach((video) => {
-        video.autoplay = false;
+// Add an event listener to interrupt autoplay when the video ends
+const videoElement = document.querySelector("video");
+if (videoElement) {
+    videoElement.addEventListener("ended", function () {
+        handleVideoEnded();
     });
 }
 
-// Function to enable autoplay on YouTube
-function enableYouTubeAutoplay() {
-    const videos = document.querySelectorAll("video");
-    videos.forEach((video) => {
-        video.autoplay = true;
-    });
-}
+// Function to check if the addon is active and stopping the autoplay
+function handleVideoEnded() {
+    // Check if the addon is active by the user
+    browser.storage.local.get("YouTubeNoSpoilersActive").then((result) => {
+        const isSpoilersActive = result.YouTubeNoSpoilersActive;
 
-// Function to check the value of YouTubeNoSpoilersActive
-function checkYouTubeNoSpoilersActive() {
-    browser.storage.local
-        .get("YouTubeNoSpoilersActive")
-        .then((result) => {
-            const isActive = result.YouTubeNoSpoilersActive;
-            if (isActive) {
-                disableYouTubeAutoplay();
+        if (isSpoilersActive) {
+            // Look for the cancel button
+            const cancelAutoplayButton = document.querySelector(
+                ".ytp-autonav-endscreen-upnext-cancel-button"
+            );
+
+            //Clicking the cancle button IF it exists to interrupt autoplay
+            if (cancelAutoplayButton) {
+                cancelAutoplayButton.click();
             } else {
-                enableYouTubeAutoplay();
+                console.log("Could not find autoplay button!");
             }
-        })
-        .catch((error) => {
-            console.error("Error reading browser.storage.local: ", error);
-        });
+        }
+    });
 }
-
-// Execute the function when the page is loaded
-window.addEventListener("load", () => {
-    checkYouTubeNoSpoilersActive();
-});

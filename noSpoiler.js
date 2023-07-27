@@ -1,6 +1,6 @@
 const injectCss = `
 /* Hide the elements */
-#secondary, #info, #chat, #comments, #bottom-row, .ytp-ce-top-left-quad, .ytp-ce-top-right-quad, .ytp-progress-bar-container, .ytp-time-display, .ytp-cued-thumbnail-overlay-image, ytd-thumbnail-overlay-time-status-renderer {
+#secondary, #info, #chat, #comments, #bottom-row, .ytp-ce-top-left-quad, .ytp-ce-top-right-quad, .ytp-ce-bottom-left-quad, .ytp-ce-bottom-right-quad, .ytp-autonav-endscreen-upnext-container, .ytp-endscreen-content, .ytp-suggestion-set, .ytp-progress-bar-container, .ytp-time-display, .ytp-cued-thumbnail-overlay-image, ytd-thumbnail-overlay-time-status-renderer {
   display: none !important;
 }
 
