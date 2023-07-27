@@ -1,21 +1,15 @@
-document.addEventListener("DOMContentLoaded", restoreOptions);
-document.querySelector("form").addEventListener("submit", saveOptions);
+document.addEventListener("DOMContentLoaded", function () {
+    const hotkeyInput = document.getElementById("hotkey");
+    const saveButton = document.getElementById("save");
 
-/* function saveOptions(event) {
-    event.preventDefault();
-    const option1Value = document.getElementById("option1").checked;
-    const option2Value = document.getElementById("option2").value;
-
-    browser.storage.local.set({
-        option1: option1Value,
-        option2: option2Value,
+    // Werte aus den gespeicherten Einstellungen wiederherstellen
+    browser.storage.sync.get(["hotkey"], function (result) {
+        hotkeyInput.value = result.hotkey || "";
     });
-}
 
-function restoreOptions() {
-    browser.storage.local.get(["option1", "option2"]).then((result) => {
-        document.getElementById("option1").checked = result.option1 || false;
-        document.getElementById("option2").value = result.option2 || "";
+    // Ereignislistener hinzufügen, um Einstellungen zu speichern
+    saveButton.addEventListener("click", function () {
+        const hotkey = hotkeyInput.value;
+        browser.storage.sync.set({ hotkey: hotkey });
     });
-}
- */
+});

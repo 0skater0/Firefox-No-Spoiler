@@ -2,11 +2,36 @@
 <html>
     <head>
         <title>No Spoiler Options</title>
-        <script src="Firefox-No-Spoiler-Options.js"></script>
     </head>
     <body>
         <h1>Hotkeys</h1>
-        <label for="activateHK">Activate hotkey</label>
-        <label for="deactivateHK">Deactivate hotkey</label>
+        <label for="hotkey">Toggle hotkey</label>
+        <input type="text" id="hotkey" placeholder="Drücken Sie die gewünschte Tastenkombination" />
+
+        <h1>Settings</h1>
+        <input type="checkbox" id="showVideoTime" />
+        <label for="showVideoTime">Show video time</label><br />
+
+        <input type="checkbox" id="showProgressBar" />
+        <label for="showProgressBar">Show progress bar</label> <br />
+
+        <input type="checkbox" id="showComments" />
+        <label for="showComments">Show comments</label><br />
+
+        <input type="checkbox" id="showDescription" />
+        <label for="showDescription">Show description</label><br />
+
+        <input type="checkbox" id="showRecommendations" />
+        <label for="showRecommendations">Show recommendations</label><br />
+
+        <input type="checkbox" id="showEndcard" />
+        <label for="showEndcard">Show endcard</label><br />
+
+        <input type="checkbox" id="enableAutoplay" />
+        <label for="enableAutoplay">Enable autoplay</label><br />
+
+        <button id="save">Save settings</button>
+
+        <script src="firefox-no-spoiler-options.js"></script>
     </body>
 </html>
