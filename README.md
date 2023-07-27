@@ -8,4 +8,4 @@ Roadmap:
 - make settings visual pleasing
 
 
-<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Me', '#29abe0', 'P5P7NLC40');kofiwidget2.draw();</script>
+[![ko-fi](https://storage.ko-fi.com/cdn/kofi2.png?v=3)](https://ko-fi.com/P5P7NLC40)
