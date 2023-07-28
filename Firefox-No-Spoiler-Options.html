@@ -1,36 +1,54 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="icons/YouTube-No-Spoiler-On.png" />
+        <link rel="stylesheet" href="styles.css" />
         <title>No Spoiler Options</title>
     </head>
     <body>
-        <h1>Hotkeys</h1>
-        <label for="hotkey">Toggle hotkey</label>
-        <input type="text" id="hotkey" placeholder="Drücken Sie die gewünschte Tastenkombination" />
-
-        <h1>Settings</h1>
-        <input type="checkbox" id="showVideoTime" />
-        <label for="showVideoTime">Show video time</label><br />
-
-        <input type="checkbox" id="showProgressBar" />
-        <label for="showProgressBar">Show progress bar</label> <br />
-
-        <input type="checkbox" id="showComments" />
-        <label for="showComments">Show comments</label><br />
-
-        <input type="checkbox" id="showDescription" />
-        <label for="showDescription">Show description</label><br />
-
-        <input type="checkbox" id="showRecommendations" />
-        <label for="showRecommendations">Show recommendations</label><br />
-
-        <input type="checkbox" id="showEndcard" />
-        <label for="showEndcard">Show endcard</label><br />
-
-        <input type="checkbox" id="enableAutoplay" />
-        <label for="enableAutoplay">Enable autoplay</label><br />
-
+        <button class="dark-mode-btn" id="darkModeToggle">🌙</button>
+        <h1>No Spoiler Options</h1>
+        <div class="group">
+            <h2>Hotkeys</h2>
+            <label for="hotkey">Toggle hotkey</label>
+            <input type="text" id="hotkey" placeholder="Press the desired key combination" />
+        </div>
+        <div class="group">
+            <h2>Settings</h2>
+            <label>
+                <input type="checkbox" id="showVideoTime" />
+                Show video time
+            </label>
+            <label>
+                <input type="checkbox" id="showProgressBar" />
+                Show progress bar
+            </label>
+            <label>
+                <input type="checkbox" id="showComments" />
+                Show comments
+            </label>
+            <label>
+                <input type="checkbox" id="showDescription" />
+                Show description
+            </label>
+            <label>
+                <input type="checkbox" id="showRecommendations" />
+                Show recommendations
+            </label>
+            <label>
+                <input type="checkbox" id="showEndcard" />
+                Show endcard
+            </label>
+            <label>
+                <input type="checkbox" id="enableAutoplay" />
+                Enable autoplay
+            </label>
+        </div>
         <button id="save">Save settings</button>
+
+        <div id="notification"></div>
 
         <script src="firefox-no-spoiler-options.js"></script>
     </body>

@@ -15,24 +15,26 @@ chrome.contextMenus.onClicked.addListener(function (info) {
     }
 });
 
-// This function retrieves the user-defined hotkey from browser storage and updates the 'toggle-addon' command's shortcut key binding. If no user-defined hotkey is found, a default hotkey of 'Ctrl+Shift+U' is used.
+// This function retrieves the user-defined hotkey from browser storage and updates the 'toggle-addon' command's shortcut key binding. If no user-defined hotkey is found, a default hotkey of 'Ctrl+Alt+U' is used.
 function updateHotkey() {
     // Get 'hotkey' value from the browser's synchronous storage
-    browser.storage.sync.get(["hotkey"], function (result) {
-        // If hotkey is not set, use 'Ctrl+Shift+U' as default hotkey
-        const hotkey = result.hotkey || "Ctrl+Shift+U";
+    chrome.storage.sync.get(["hotkey"], function (result) {
+        // If hotkey is not set, use 'Ctrl+Alt+U' as default hotkey
+        const hotkey = result.hotkey || "Ctrl+Alt+U";
 
         // Update the 'toggle-addon' command's hotkey in the browser's command API
-        browser.commands.update({
-            name: "toggle-addon",
+        chrome.commands.update("toggle-addon", {
             shortcut: hotkey,
         });
     });
 }
 
 // Add event listener to update hotkey registration when options change
-browser.storage.onChanged.addListener(function (changes, areaName) {
+chrome.storage.onChanged.addListener(function (changes, areaName) {
     if (areaName === "sync" && "hotkey" in changes) {
         updateHotkey();
     }
 });
+
+// Call updateHotkey initially to set the hotkey on extension load
+updateHotkey();

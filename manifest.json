@@ -16,8 +16,8 @@
   "commands": {
     "toggle-addon": {
       "suggested_key": {
-        "default": "Ctrl+Shift+U",
-        "mac": "Command+Shift+U"
+        "default": "Ctrl+Alt+U",
+        "mac": "Command+Alt+U"
       },
       "description": "Activates or deactivates the addon."
     }
@@ -52,7 +52,8 @@
   ],
 
   "web_accessible_resources": [
-    "icons/*.png"
+    "icons/*.png",
+    "styles.css" 
   ]
 
 }
