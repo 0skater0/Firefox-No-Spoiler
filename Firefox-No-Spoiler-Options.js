@@ -75,10 +75,16 @@ saveButton.addEventListener("click", async () => {
         showNotification("Settings saved");
 
         // Send a message to the background script with the updated hotkey
-        browser.runtime.sendMessage({ hotkey: hotkeyValue });
+        browser.runtime.sendMessage({ hotkeyValue });
+
+        // Update the command's shortcut
+        await browser.commands.update({
+            name: "toggle-addon",
+            shortcut: hotkeyValue,
+        });
     } else {
         // If the hotkey is empty, show an error notification
-        showNotification("Please enter a valid hotkey");
+        showNotification("Please enter a valid hotkey", true); // Add the "true" argument to make the notification red
     }
 });
 
@@ -102,12 +108,12 @@ async function getSavedHotkey() {
 
         // If the saved hotkey is empty, fetch the default hotkey from manifest.json
         if (!savedHotkey) {
-            // Get the default hotkey for the "toggle-addon" command based on the current platform
+            // Get the default hotkey for the "toggle-addon" command
             const commands = await browser.commands.getAll();
             const toggleAddonCommand = commands.find((command) => command.name === "toggle-addon");
 
-            // Use the default hotkey for the current platform (e.g., Windows, Mac)
-            return toggleAddonCommand.suggested_key.default;
+            // Use the current hotkey for the command
+            return toggleAddonCommand.shortcut;
         }
 
         return savedHotkey;
@@ -118,8 +124,12 @@ async function getSavedHotkey() {
 }
 
 // Function to save the hotkey in storage
-function saveHotkey(noSpoilerHotkey) {
-    browser.storage.sync.set({ noSpoilerHotkey });
+async function saveHotkey(noSpoilerHotkey) {
+    try {
+        await browser.storage.sync.set({ noSpoilerHotkey });
+    } catch (error) {
+        console.error("Error saving hotkey:", error);
+    }
 }
 
 // Function to update the hotkey input field with the provided hotkey
@@ -128,9 +138,12 @@ function updateHotkeyInput(hotkey) {
 }
 
 // Function to show a notification with the given message
-function showNotification(message) {
+function showNotification(message, isError = false) {
     notification.textContent = message;
     notification.style.opacity = "1";
+
+    // Set the notification background color to red if it's an error notification
+    notification.style.backgroundColor = isError ? "red" : "green";
 
     // Fade out the notification after the active duration
     setTimeout(() => {
@@ -146,13 +159,3 @@ function showNotification(message) {
         }, 2000); // 2s delay (same as fade-out duration) before removing transition
     }, 2000); // 2s active duration
 }
-
-// Implement the desired action when the saved hotkey is triggered
-document.addEventListener("keydown", (event) => {
-    const { key, ctrlKey, shiftKey, altKey, metaKey } = event;
-    const pressedHotkey = formatHotkey(key, { ctrlKey, shiftKey, altKey, metaKey });
-    if (pressedHotkey === hotkeyInput.value.trim()) {
-        // Perform the desired action here, e.g., enable/disable addon
-        console.log("Action performed for hotkey:", hotkeyInput.value.trim());
-    }
-});

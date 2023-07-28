@@ -100,7 +100,4 @@ browser.browserAction.onClicked.addListener(toggleActive);
 // Listen for the tab update event to reapply the CSS code whenever a new page loads
 browser.tabs.onUpdated.addListener(applyCSS);
 
-// Call the updateHotkey function once when the background script loads to initialize the hotkey registration
-updateHotkey(); // Call the function to initialize the hotkey registration
-
 //#endregion
