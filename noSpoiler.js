@@ -1,7 +1,7 @@
 // Set the action for the hotkey
 browser.commands.onCommand.addListener(function (command) {
     if (command === "toggle-addon") {
-        toggleActive();
+        toggleActive(); // Call the function to toggle the extension's activation status
     }
 });
 
@@ -57,26 +57,26 @@ async function isActive() {
 // Toggle the activation status of the extension
 async function toggleActive(e) {
     let active = await isActive();
-    await browser.storage.local.set({ YouTubeNoSpoilersActive: !active });
-    applyCSS();
+    await browser.storage.local.set({ YouTubeNoSpoilersActive: !active }); // Update the activation status in local storage
+    applyCSS(); // Apply the CSS code based on the updated activation status
 }
 
 // Activate the extension by injecting the CSS code and updating the extension icon
 async function activate() {
-    browser.tabs.insertCSS({ code: injectCss, runAt: "document_start" });
+    browser.tabs.insertCSS({ code: injectCss, runAt: "document_start" }); // Inject the CSS code to hide elements and modify video display
     browser.browserAction.setIcon({
         path: {
-            32: "icons/YouTube-No-Spoiler-On.png",
+            32: "icons/YouTube-No-Spoiler-On.png", // Update the extension icon to indicate it is active
         },
     });
 }
 
 // Deactivate the extension by removing the injected CSS code and updating the extension icon
 async function deactivate() {
-    browser.tabs.removeCSS({ code: injectCss, runAt: "document_start" });
+    browser.tabs.removeCSS({ code: injectCss, runAt: "document_start" }); // Remove the injected CSS code to restore default video display
     browser.browserAction.setIcon({
         path: {
-            32: "icons/YouTube-No-Spoiler-Off.png",
+            32: "icons/YouTube-No-Spoiler-Off.png", // Update the extension icon to indicate it is inactive
         },
     });
 }
@@ -85,14 +85,14 @@ async function deactivate() {
 async function applyCSS() {
     var active = await isActive();
     if (active) {
-        activate();
+        activate(); // If the extension is active, call the activate function
     } else {
-        deactivate();
+        deactivate(); // If the extension is inactive, call the deactivate function
     }
 }
 
 // Initial application of CSS code on extension load
-applyCSS();
+applyCSS(); // Apply CSS code when the extension loads
 
 // Listen for the browser action button click event to toggle the extension activation status
 browser.browserAction.onClicked.addListener(toggleActive);
@@ -100,7 +100,7 @@ browser.browserAction.onClicked.addListener(toggleActive);
 // Listen for the tab update event to reapply the CSS code whenever a new page loads
 browser.tabs.onUpdated.addListener(applyCSS);
 
-// Funktion einmal beim Laden des Hintergrundskripts aufrufen, um die Hotkey-Registrierung zu initialisieren
-updateHotkey();
+// Call the updateHotkey function once when the background script loads to initialize the hotkey registration
+updateHotkey(); // Call the function to initialize the hotkey registration
 
 //#endregion

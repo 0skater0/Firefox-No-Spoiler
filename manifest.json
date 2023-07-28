@@ -2,17 +2,15 @@
   "description": "Enhance focus with this Firefox addon: Hide YouTube video time, progress bar, comments, description, recommendations, autoplay and end-card. Enjoy distraction-free viewing. Fully customizable for a better experience.",
   "manifest_version": 2,
   "name": "No Spoilers: Youtube",
-  "version": "0.3",
+  "version": "0.4.2",
   "homepage_url": "https://github.com/0skater0/Firefox-No-Spoiler",
   "icons": {
     "128": "icons/YouTube-No-Spoiler-On.png"
   },
-
   "options_ui": {
     "page": "firefox-no-spoiler-options.html",
     "open_in_tab": true
   },
-
   "commands": {
     "toggle-addon": {
       "suggested_key": {
@@ -22,7 +20,6 @@
       "description": "Activates or deactivates the addon."
     }
   },
-
   "permissions": [
     "*://*.youtube.com/*",
     "*://youtube.com/*",
@@ -31,29 +28,34 @@
     "storage",
     "contextMenus"
   ],
-
   "browser_action": {
     "default_icon": "icons/YouTube-No-Spoiler-On.png",
     "default_title": "Show/hide spoilers"
   },
-
   "background": {
-    "scripts": ["noSpoiler.js", "background.js"]
+    "scripts": [
+      "noSpoiler.js",
+      "background.js"
+    ]
   },
-
   "content_scripts": [
     {
       "matches": [
         "*://*.youtube.com/*",
         "*://youtube.com/*"
       ],
-      "js": ["disableAutoplay.js"]
+      "js": [
+        "disableAutoplay.js"
+      ]
     }
   ],
-
   "web_accessible_resources": [
     "icons/*.png",
-    "styles.css" 
-  ]
-
+    "styles.css"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{d27fe5e6-f507-492e-b030-1a17debff539}"
+    }
+  }
 }

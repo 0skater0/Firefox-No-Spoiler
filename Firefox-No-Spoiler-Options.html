@@ -1,55 +1,77 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="icons/YouTube-No-Spoiler-On.png" />
-        <link rel="stylesheet" href="styles.css" />
-        <title>No Spoiler Options</title>
-    </head>
-    <body>
-        <button class="dark-mode-btn" id="darkModeToggle">🌙</button>
-        <h1>No Spoiler Options</h1>
-        <div class="group">
-            <h2>Hotkeys</h2>
-            <label for="hotkey">Toggle hotkey</label>
-            <input type="text" id="hotkey" placeholder="Press the desired key combination" />
-        </div>
-        <div class="group">
-            <h2>Settings</h2>
-            <label>
-                <input type="checkbox" id="showVideoTime" />
-                Show video time
-            </label>
-            <label>
-                <input type="checkbox" id="showProgressBar" />
-                Show progress bar
-            </label>
-            <label>
-                <input type="checkbox" id="showComments" />
-                Show comments
-            </label>
-            <label>
-                <input type="checkbox" id="showDescription" />
-                Show description
-            </label>
-            <label>
-                <input type="checkbox" id="showRecommendations" />
-                Show recommendations
-            </label>
-            <label>
-                <input type="checkbox" id="showEndcard" />
-                Show endcard
-            </label>
-            <label>
-                <input type="checkbox" id="enableAutoplay" />
-                Enable autoplay
-            </label>
-        </div>
-        <button id="save">Save settings</button>
 
-        <div id="notification"></div>
+<head>
+    <!-- Set the character encoding and viewport for mobile devices -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Set the favicon (website icon) -->
+    <link rel="icon" href="icons/YouTube-No-Spoiler-On.png" />
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Set the title of the page -->
+    <title>No Spoiler Options</title>
+</head>
 
-        <script src="firefox-no-spoiler-options.js"></script>
-    </body>
+<body>
+    <!-- Dark Mode Toggle Button -->
+    <button class="dark-mode-btn" id="darkModeToggle">🌙</button>
+    <!-- Main Heading -->
+    <h1>No Spoiler Options</h1>
+    <!-- Hotkeys Group -->
+    <div class="group">
+        <h2>Hotkeys</h2>
+        <!-- Hotkey Input Field -->
+        <label for="hotkey">Toggle hotkey</label>
+        <input type="text" id="hotkey" placeholder="Press the desired key combination" />
+    </div>
+    <!-- Settings Group -->
+    <div class="group">
+        <h2>Settings</h2>
+        <!-- Checkbox and Label for Show Video Time Setting -->
+        <label>
+            <input type="checkbox" id="showVideoTime" />
+            Show video time
+        </label>
+        <!-- Checkbox and Label for Show Progress Bar Setting -->
+        <label>
+            <input type="checkbox" id="showProgressBar" />
+            Show progress bar
+        </label>
+        <!-- Checkbox and Label for Show Comments Setting -->
+        <label>
+            <input type="checkbox" id="showComments" />
+            Show comments
+        </label>
+        <!-- Checkbox and Label for Show Description Setting -->
+        <label>
+            <input type="checkbox" id="showDescription" />
+            Show description
+        </label>
+        <!-- Checkbox and Label for Show Recommendations Setting -->
+        <label>
+            <input type="checkbox" id="showRecommendations" />
+            Show recommendations
+        </label>
+        <!-- Checkbox and Label for Show Endcard Setting -->
+        <label>
+            <input type="checkbox" id="showEndcard" />
+            Show endcard
+        </label>
+        <!-- Checkbox and Label for Enable Autoplay Setting -->
+        <label>
+            <input type="checkbox" id="enableAutoplay" />
+            Enable autoplay
+        </label>
+    </div>
+    <!-- Save Settings Button -->
+    <button id="save">Save settings</button>
+
+    <!-- Notification Element -->
+    <div id="notification"></div>
+
+    <!-- Include the JavaScript file -->
+    <script src="firefox-no-spoiler-options.js"></script>
+</body>
+
 </html>
