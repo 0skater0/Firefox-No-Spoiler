@@ -49,6 +49,22 @@ const injectCss = `
 }
 `;
 
+//if show video time
+
+//if Show progress bar
+
+//if Show comments
+
+//if Show description
+
+//if Show recommendations
+
+//if Show endcard
+
+//if Enable autoplay
+
+//const cssInjectCode =
+
 // Check if the extension is currently active
 async function isActive() {
     return (await browser.storage.local.get("YouTubeNoSpoilersActive")).YouTubeNoSpoilersActive;

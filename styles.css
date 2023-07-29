@@ -1,6 +1,5 @@
 /* CSS Styles */
-body
-{
+body {
     font-family: Arial, sans-serif;
     max-width: 500px;
     margin: 0 auto;
@@ -10,19 +9,16 @@ body
     position: relative;
 }
 
-h1
-{
+h1 {
     margin-bottom: 10px;
 }
 
-label
-{
+label {
     display: block;
     margin-bottom: 5px;
 }
 
-input[type="text"]
-{
+input[type="text"] {
     width: 75%;
     padding: 10px;
     font-size: 16px;
@@ -30,15 +26,13 @@ input[type="text"]
     border-radius: 5px;
 }
 
-input[type="checkbox"]
-{
+input[type="checkbox"] {
     display: inline-block;
     vertical-align: middle;
     margin-right: 5px;
 }
 
-button
-{
+button {
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
@@ -47,41 +41,35 @@ button
     cursor: pointer;
 }
 
-button:hover
-{
+button:hover {
     background-color: #0056b3;
 }
 
-.group
-{
+.group {
     border: 1px solid #ccc;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
 }
 
-.group h2
-{
+.group h2 {
     margin-top: -10px;
 }
 
 /* Dark Mode Styles */
-body.dark-mode
-{
+body.dark-mode {
     color: #f0f0f0;
     background-color: #333;
 }
 
 body.dark-mode input[type="text"],
 body.dark-mode input[type="checkbox"],
-body.dark-mode button
-{
+body.dark-mode button {
     border-color: #f0f0f0;
 }
 
 /* Dark Mode Button Styles */
-.dark-mode-btn
-{
+.dark-mode-btn {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -98,14 +86,12 @@ body.dark-mode button
     justify-content: center;
 }
 
-.dark-mode-btn:hover
-{
+.dark-mode-btn:hover {
     background-color: #555;
 }
 
 /* Notification Styles */
-#notification
-{
+#notification {
     position: fixed;
     top: 0;
     left: 0;
