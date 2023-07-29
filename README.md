@@ -6,13 +6,13 @@ Enhance focus with this Firefox addon: Hide YouTube video time, progress bar, co
 
 ## Features
 
-- Hide/Show video time
-- Hide/Show progress bar
-- Hide/Show comments
-- Hide/Show description
-- Hide/Show recommendations
-- Hide/Show endcard
-- Enable/disable autoplay
+-   Hide/Show video time
+-   Hide/Show progress bar
+-   Hide/Show comments
+-   Hide/Show description
+-   Hide/Show recommendations
+-   Hide/Show endcard
+-   Enable/disable autoplay
 
 ## Usage
 
@@ -23,7 +23,7 @@ To access further customization options, simply right-click on the addon icon. T
 
 ### AMO
 
-1. Navigate to the Firefox Addon Store of <a href="https://addons.mozilla.org/de/firefox/addon/no-spoilers-youtube/" target="_blank">this addon</a>
+1. Navigate to the Firefox Addon Store of [this addon](https://addons.mozilla.org/de/firefox/addon/no-spoilers-youtube/)
 2. Press the blue button 'Add to Firefox'
 
 ### Manual
@@ -34,11 +34,11 @@ To access further customization options, simply right-click on the addon icon. T
 
 ## Feedback and Support
 
-If you encounter any issues or have suggestions for improvements, please create a new issue <a href="https://github.com/0skater0/Firefox-No-Spoiler/issues" target="_blank">here</a>.
+If you encounter any issues or have suggestions for improvements, please create a new issue [here](https://github.com/0skater0/Firefox-No-Spoiler/issues).
 
 ## License
 
-This plugin is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+This addon is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
 Please note that this plugin is provided as-is without any warranty. Use it at your own risk.
 
 ### Support Me & my work 🙏

@@ -32,15 +32,23 @@ if (darkModeEnabled === "true") {
     toggleDarkMode();
 }
 
-// ---------------------------- Hotkey ----------------------------
+// ---------------------------- Settings ----------------------------
 // Get the hotkey input element, save button element, and notification element from the DOM
 const hotkeyInput = document.getElementById("hotkey");
 const saveButton = document.getElementById("save");
 const notification = document.getElementById("notification");
+const showVideoTimeCheckbox = document.getElementById("showVideoTime");
+const showProgressBarCheckbox = document.getElementById("showProgressBar");
+const showCommentsCheckbox = document.getElementById("showComments");
+const showDescriptionCheckbox = document.getElementById("showDescription");
+const showRecommendationsCheckbox = document.getElementById("showRecommendations");
+const showEndcardCheckbox = document.getElementById("showEndcard");
+const enableAutoplayCheckbox = document.getElementById("enableAutoplay");
 
 // Run the updateHotkeyInputOnLoad function once the DOM content is loaded
 document.addEventListener("DOMContentLoaded", () => {
     updateHotkeyInputOnLoad();
+    updateSettingsOnLoad();
 });
 
 // Function to update the hotkey input field when the page loads
@@ -51,6 +59,49 @@ async function updateHotkeyInputOnLoad() {
         updateHotkeyInput(savedHotkey);
     } catch (error) {
         console.error("Error retrieving saved hotkey:", error);
+        // Handle the error here if necessary
+    }
+}
+
+// Function to get the saved settings from browser.storage.sync
+async function getSettings() {
+    try {
+        const data = await browser.storage.sync.get([
+            "showVideoTime",
+            "showProgressBar",
+            "showComments",
+            "showDescription",
+            "showRecommendations",
+            "showEndcard",
+            "enableAutoplay",
+        ]);
+
+        // Use the retrieved settings
+        const settings = {
+            showVideoTime: data.showVideoTime || false,
+            showProgressBar: data.showProgressBar || false,
+            showComments: data.showComments || false,
+            showDescription: data.showDescription || false,
+            showRecommendations: data.showRecommendations || false,
+            showEndcard: data.showEndcard || false,
+            enableAutoplay: data.enableAutoplay || false,
+        };
+
+        return settings;
+    } catch (error) {
+        console.error("Error retrieving settings:", error);
+        return {};
+    }
+}
+
+// Function to update the checkboxes when the page loads
+async function updateSettingsOnLoad() {
+    try {
+        // Retrieve the saved settings from storage and update the checkboxes
+        const savedSettings = await getSettings();
+        updateSettings(savedSettings);
+    } catch (error) {
+        console.error("Error retrieving saved settings:", error);
         // Handle the error here if necessary
     }
 }
@@ -69,9 +120,20 @@ hotkeyInput.addEventListener("keydown", (event) => {
 // Add a click event listener to the save button to save the hotkey and show a notification
 saveButton.addEventListener("click", async () => {
     const hotkeyValue = hotkeyInput.value.trim();
+    const settings = {
+        showVideoTime: showVideoTimeCheckbox.checked,
+        showProgressBar: showProgressBarCheckbox.checked,
+        showComments: showCommentsCheckbox.checked,
+        showDescription: showDescriptionCheckbox.checked,
+        showRecommendations: showRecommendationsCheckbox.checked,
+        showEndcard: showEndcardCheckbox.checked,
+        enableAutoplay: enableAutoplayCheckbox.checked,
+    };
+
     if (hotkeyValue) {
-        // Save the hotkey in storage and show a success notification
+        // Save the hotkey&settings in storage and show a success notification
         saveHotkey(hotkeyValue);
+        saveSettings(settings);
         showNotification("Settings saved");
 
         // Send a message to the background script with the updated hotkey
@@ -132,9 +194,29 @@ async function saveHotkey(noSpoilerHotkey) {
     }
 }
 
+// Function to save the settings in storage
+async function saveSettings(settings) {
+    try {
+        await browser.storage.sync.set(settings);
+    } catch (error) {
+        console.error("Error saving settings:", error);
+    }
+}
+
 // Function to update the hotkey input field with the provided hotkey
 function updateHotkeyInput(hotkey) {
     hotkeyInput.value = hotkey;
+}
+
+// Function to update the checkboxes based on the saved settings
+function updateSettings(settings) {
+    showVideoTimeCheckbox.checked = settings.showVideoTime;
+    showProgressBarCheckbox.checked = settings.showProgressBar;
+    showCommentsCheckbox.checked = settings.showComments;
+    showDescriptionCheckbox.checked = settings.showDescription;
+    showRecommendationsCheckbox.checked = settings.showRecommendations;
+    showEndcardCheckbox.checked = settings.showEndcard;
+    enableAutoplayCheckbox.checked = settings.enableAutoplay;
 }
 
 // Function to show a notification with the given message
