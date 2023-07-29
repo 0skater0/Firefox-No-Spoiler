@@ -23,7 +23,7 @@ To access further customization options, simply right-click on the addon icon. T
 
 ### AMO
 
-1. Navigate to the Firefox Addon Store of this addon <https://addons.mozilla.org/de/firefox/addon/no-spoilers-youtube/>
+1. Navigate to the Firefox Addon Store of [this addon](https://addons.mozilla.org/de/firefox/addon/no-spoilers-youtube/)
 2. Press the blue button 'Add to Firefox'
 
 ### Manual
