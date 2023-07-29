@@ -6,13 +6,13 @@ Enhance focus with this Firefox addon: Hide YouTube video time, progress bar, co
 
 ## Features
 
--   Hide/Show video time
--   Hide/Show progress bar
--   Hide/Show comments
--   Hide/Show description
--   Hide/Show recommendations
--   Hide/Show endcard
--   Enable/disable autoplay
+- Hide/Show video time
+- Hide/Show progress bar
+- Hide/Show comments
+- Hide/Show description
+- Hide/Show recommendations
+- Hide/Show endcard
+- Enable/disable autoplay
 
 ## Usage
 
