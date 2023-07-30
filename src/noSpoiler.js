@@ -7,6 +7,7 @@ async function getSettings() {
             "showComments",
             "showDescription",
             "showRecommendations",
+            "showChat",
             "showEndcard",
             "enableAutoplay",
         ]);
@@ -18,6 +19,7 @@ async function getSettings() {
             showComments: data.showComments || false,
             showDescription: data.showDescription || false,
             showRecommendations: data.showRecommendations || false,
+            showChat: data.showChat || false,
             showEndcard: data.showEndcard || false,
             enableAutoplay: data.enableAutoplay || false,
         };
@@ -72,6 +74,13 @@ async function buildInjectCss() {
     if (!settings.showRecommendations) {
         cssInjectCode += `
         .ytp-suggestion-set, #related {
+            display: none !important;
+        }`;
+    }
+
+    if (!settings.showChat) {
+        cssInjectCode += `
+        #chat {
             display: none !important;
         }`;
     }

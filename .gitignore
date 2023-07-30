@@ -1,0 +1,4 @@
+# ignore minified code
+/src/minified/
+
+.vscode

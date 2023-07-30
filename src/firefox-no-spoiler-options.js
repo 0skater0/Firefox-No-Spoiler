@@ -43,6 +43,7 @@ const showProgressBarCheckbox = document.getElementById("showProgressBar");
 const showCommentsCheckbox = document.getElementById("showComments");
 const showDescriptionCheckbox = document.getElementById("showDescription");
 const showRecommendationsCheckbox = document.getElementById("showRecommendations");
+const showChatCheckbox = document.getElementById("showChat");
 const showEndcardCheckbox = document.getElementById("showEndcard");
 const enableAutoplayCheckbox = document.getElementById("enableAutoplay");
 
@@ -73,6 +74,7 @@ async function getSettings() {
             "showComments",
             "showDescription",
             "showRecommendations",
+            "showChat",
             "showEndcard",
             "enableAutoplay",
         ]);
@@ -127,6 +129,7 @@ saveButton.addEventListener("click", async () => {
         showComments: showCommentsCheckbox.checked,
         showDescription: showDescriptionCheckbox.checked,
         showRecommendations: showRecommendationsCheckbox.checked,
+        showChat: showChatCheckbox.checked,
         showEndcard: showEndcardCheckbox.checked,
         enableAutoplay: enableAutoplayCheckbox.checked,
     };
@@ -160,6 +163,7 @@ resetButton.addEventListener("click", async () => {
         showComments: false,
         showDescription: false,
         showRecommendations: false,
+        showChat: false,
         showEndcard: false,
         enableAutoplay: false,
     };
@@ -249,6 +253,7 @@ function updateSettings(settings) {
     showCommentsCheckbox.checked = settings.showComments;
     showDescriptionCheckbox.checked = settings.showDescription;
     showRecommendationsCheckbox.checked = settings.showRecommendations;
+    showChatCheckbox.checked = settings.showChat;
     showEndcardCheckbox.checked = settings.showEndcard;
     enableAutoplayCheckbox.checked = settings.enableAutoplay;
 }
