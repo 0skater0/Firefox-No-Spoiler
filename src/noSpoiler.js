@@ -1,10 +1,3 @@
-// Set the action for the hotkey
-browser.commands.onCommand.addListener(function (command) {
-    if (command === "toggle-addon") {
-        toggleActive(); // Call the function to toggle the extension's activation status
-    }
-});
-
 // Function to get the saved settings from browser.storage.sync
 async function getSettings() {
     try {
@@ -107,68 +100,6 @@ async function toggleActive(e) {
     applyCSS(); // Apply the CSS code based on the updated activation status
 }
 
-// Global variable to store the CSS code
-let activeCssCode = "";
-
-// Activate the extension by injecting the CSS code and updating the extension icon
-async function activate() {
-    // Call buildInjectCss() and wait for it to complete
-    activeCssCode = await buildInjectCss();
-
-    // Inject the generated CSS code to hide elements and modify video display
-    browser.tabs.insertCSS({ code: activeCssCode, runAt: "document_start" });
-
-    // Handle autoplay setting
-    handleAutoplay();
-
-    // Update the extension icon to indicate it is active
-    browser.browserAction.setIcon({
-        path: {
-            32: "icons/YouTube-No-Spoiler-On.png",
-        },
-    });
-}
-
-// Deactivate the extension by removing the injected CSS code and updating the extension icon
-async function deactivate() {
-    if (activeCssCode) {
-        // Remove the injected CSS code to restore default video display
-        browser.tabs.removeCSS({ code: activeCssCode, runAt: "document_start" });
-
-        // Reset activeCssCode
-        activeCssCode = "";
-    }
-
-    // Handle autoplay setting
-    handleAutoplay();
-
-    // Update the extension icon to indicate it is inactive
-    browser.browserAction.setIcon({
-        path: {
-            32: "icons/YouTube-No-Spoiler-Off.png",
-        },
-    });
-}
-
-// Apply the CSS code based on the current activation status
-async function applyCSS() {
-    var active = await isActive();
-    if (active) {
-        activate(); // If the extension is active, call the activate function
-    } else {
-        deactivate(); // If the extension is inactive, call the deactivate function
-    }
-}
-
-// Initial application of CSS code on extension load
-applyCSS(); // Apply CSS code when the extension loads
-
-// Listen for the browser action button click event to toggle the extension activation status
-browser.browserAction.onClicked.addListener(toggleActive);
-
-// Listen for the tab update event to reapply the CSS code whenever a new page loads
-browser.tabs.onUpdated.addListener(applyCSS);
-
 // Toggles YouTube autoplay based on extension activity and user's original autoplay setting
 async function handleAutoplay() {
     try {
@@ -253,3 +184,79 @@ async function handleAutoplay() {
         console.error("NoSpoiler: Failed to execute autoplay script at ", error);
     }
 }
+
+// Global variable to store the CSS code
+let activeCssCode = "";
+
+// Activate the extension by injecting the CSS code and updating the extension icon
+async function activate() {
+    // Call buildInjectCss() and wait for it to complete
+    activeCssCode = await buildInjectCss();
+
+    // Inject the generated CSS code to hide elements and modify video display
+    browser.tabs.insertCSS({ code: activeCssCode, runAt: "document_start" });
+
+    // Handle autoplay setting
+    handleAutoplay();
+
+    // Update the extension icon to indicate it is active
+    browser.browserAction.setIcon({
+        path: {
+            32: "icons/YouTube-No-Spoiler-On.png",
+        },
+    });
+}
+
+// Deactivate the extension by removing the injected CSS code and updating the extension icon
+async function deactivate() {
+    if (activeCssCode) {
+        // Remove the injected CSS code to restore default video display
+        browser.tabs.removeCSS({ code: activeCssCode, runAt: "document_start" });
+
+        // Reset activeCssCode
+        activeCssCode = "";
+    }
+
+    // Handle autoplay setting
+    handleAutoplay();
+
+    // Update the extension icon to indicate it is inactive
+    browser.browserAction.setIcon({
+        path: {
+            32: "icons/YouTube-No-Spoiler-Off.png",
+        },
+    });
+}
+
+// Apply the CSS code based on the current activation status
+async function applyCSS() {
+    var active = await isActive();
+    if (active) {
+        activate(); // If the extension is active, call the activate function
+    } else {
+        deactivate(); // If the extension is inactive, call the deactivate function
+    }
+}
+
+// Initial application of CSS code on extension load
+applyCSS(); // Apply CSS code when the extension loads
+
+// Listen for the browser action button click event to toggle the extension activation status
+browser.browserAction.onClicked.addListener(toggleActive);
+
+// Listen for the tab update event to reapply the CSS code whenever a new page loads
+browser.tabs.onUpdated.addListener(applyCSS);
+
+// Set the action for the hotkey
+browser.commands.onCommand.addListener(function (command) {
+    if (command === "toggle-addon") {
+        toggleActive(); // Call the function to toggle the extension's activation status
+    }
+});
+
+// Listen for messages from the options script
+browser.runtime.onMessage.addListener((message) => {
+    if (message.command === "toggle-addon") {
+        toggleActive(); // Call the function to toggle the extension's activation status
+    }
+});

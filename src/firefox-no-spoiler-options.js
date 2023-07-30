@@ -135,9 +135,9 @@ saveButton.addEventListener("click", async () => {
         // Save the hotkey&settings in storage and show a success notification
         saveHotkey(hotkeyValue);
         saveSettings(settings);
-        showNotification("Settings saved. Page reload may be needed.");
+        showNotification("Settings saved. Pages reload may be needed.");
 
-        // Send a message to the background script with the updated hotkey
+        // Send a message to the background script
         browser.runtime.sendMessage({ hotkeyValue });
 
         // Update the command's shortcut
@@ -175,7 +175,7 @@ resetButton.addEventListener("click", async () => {
     updateHotkeyInput(defaultHotkey);
 
     // Show a success notification
-    showNotification("Settings reset to default. Page reload may be needed.");
+    showNotification("Settings reset to default. Pages reload may be needed.");
 
     // Update the command's shortcut
     await browser.commands.update({
