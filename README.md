@@ -24,16 +24,8 @@ To access further customization options, simply right-click on the addon icon. T
 
 ## Installation
 
-### AMO
-
 1. Navigate to the Firefox Addon Store of [this addon](https://addons.mozilla.org/de/firefox/addon/no-spoilers-youtube/)
 2. Press the blue button 'Add to Firefox'
-
-### Manual
-
-1. Download the newest ``.xpi`` release under [Releases](https://github.com/0skater0/Firefox-No-Spoiler/releases)
-2. In firefox navigate to 'about:addons' and press the gear icon.
-3. Choose 'Install addon from file' and select the downloaded file.
 
 ## Feedback and Support
 
