@@ -2,7 +2,7 @@
   "description": "Enhance focus with this Firefox addon: Hide YouTube video time, progress bar, comments, description, recommendations, autoplay and end-card. Enjoy distraction-free viewing. Fully customizable for a better experience.",
   "manifest_version": 2,
   "name": "No Spoilers: Youtube",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "homepage_url": "https://github.com/0skater0/Firefox-No-Spoiler",
   "icons": {
     "128": "icons/YouTube-No-Spoiler-On.png"
@@ -26,7 +26,8 @@
     "activeTab",
     "tabs",
     "storage",
-    "contextMenus"
+    "contextMenus",
+    "https://www.youtube.com/*"
   ],
   "browser_action": {
     "default_icon": "icons/YouTube-No-Spoiler-On.png",

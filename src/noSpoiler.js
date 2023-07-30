@@ -31,7 +31,7 @@ async function getSettings() {
 
         return settings;
     } catch (error) {
-        console.error("Error retrieving settings:", error);
+        console.error("NoSpoiler: Error retrieving settings at ", error);
         return {};
     }
 }
@@ -90,13 +90,6 @@ async function buildInjectCss() {
         }`;
     }
 
-    /*     if (!settings.enableAutoplay) {
-        cssInjectCode += `
-        .ytp-autonav-endscreen-button-container {
-            display: none !important;
-        }`;
-    } */
-
     // Return the constructed cssInjectCode
     return cssInjectCode;
 }
@@ -114,12 +107,6 @@ async function toggleActive(e) {
     applyCSS(); // Apply the CSS code based on the updated activation status
 }
 
-// Function to toggle autoplay
-function toggleAutoplay() {
-    const autoplayButton = document.querySelector(".ytp-autoplay-button"); // Get the autoplay button element
-    if (autoplayButton) autoplayButton.click(); // If the autoplay button exists, simulate a click
-}
-
 // Global variable to store the CSS code
 let activeCssCode = "";
 
@@ -131,20 +118,8 @@ async function activate() {
     // Inject the generated CSS code to hide elements and modify video display
     browser.tabs.insertCSS({ code: activeCssCode, runAt: "document_start" });
 
-    try {
-        console.log("Clicking autoplay button...");
-        await browser.tabs.executeScript({
-            code: `
-                const autoplayButton = document.querySelector('.ytp-autoplay-button');
-                if (autoplayButton && autoplayButton.getAttribute('aria-checked') === 'true') {
-                    autoplayButton.click();
-                }
-            `,
-            runAt: "document_idle",
-        });
-    } catch (error) {
-        console.error("Failed to execute autoplay script: ", error);
-    }
+    // Handle autoplay setting
+    handleAutoplay();
 
     // Update the extension icon to indicate it is active
     browser.browserAction.setIcon({
@@ -164,20 +139,8 @@ async function deactivate() {
         activeCssCode = "";
     }
 
-    try {
-        console.log("Clicking autoplay button...");
-        await browser.tabs.executeScript({
-            code: `
-                const autoplayButton = document.querySelector('.ytp-autoplay-button');
-                if (autoplayButton && autoplayButton.getAttribute('aria-checked') === 'false') {
-                    autoplayButton.click();
-                }
-            `,
-            runAt: "document_idle",
-        });
-    } catch (error) {
-        console.error("Failed to execute autoplay script: ", error);
-    }
+    // Handle autoplay setting
+    handleAutoplay();
 
     // Update the extension icon to indicate it is inactive
     browser.browserAction.setIcon({
@@ -205,3 +168,88 @@ browser.browserAction.onClicked.addListener(toggleActive);
 
 // Listen for the tab update event to reapply the CSS code whenever a new page loads
 browser.tabs.onUpdated.addListener(applyCSS);
+
+// Toggles YouTube autoplay based on extension activity and user's original autoplay setting
+async function handleAutoplay() {
+    try {
+        var active = await isActive();
+
+        let settings = await getSettings();
+        var enableAutoplaySetting = settings.enableAutoplay;
+
+        // Get the currently active tab
+        let [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+
+        // Check if the active tab is a YouTube page
+        if (tab.url.includes("youtube.com")) {
+            // Check if the original autoplay state has been saved
+            let storageData = await browser.storage.sync.get("originalAutoplay");
+            let originalAutoplay;
+
+            if (storageData.hasOwnProperty("originalAutoplay")) {
+                // The original autoplay state was saved
+                originalAutoplay = storageData.originalAutoplay;
+            } else {
+                // The original autoplay state was not saved, get it now
+                let result = await browser.tabs.executeScript(tab.id, {
+                    code: `
+                    var autoplayButton = document.querySelector('.ytp-autonav-toggle-button');
+                    autoplayButton && autoplayButton.getAttribute('aria-checked') === 'true';
+                    `,
+                    runAt: "document_idle",
+                });
+                originalAutoplay = result[0];
+                // Save the original autoplay state
+                await browser.storage.sync.set({ originalAutoplay: originalAutoplay });
+            }
+
+            if (active) {
+                // The extension is active
+                if (!enableAutoplaySetting) {
+                    // The user has disabled autoplay in the extension settings
+                    // Disable autoplay if it's enabled
+                    if (originalAutoplay) {
+                        browser.tabs.executeScript(tab.id, {
+                            code: `
+                            var autoplayButton = document.querySelector('.ytp-autonav-toggle-button');
+                            if (autoplayButton && autoplayButton.getAttribute('aria-checked') === 'true') {
+                                autoplayButton.click();
+                            }
+                            `,
+                            runAt: "document_idle",
+                        });
+                    }
+                } else {
+                    // The user has enabled autoplay in the extension settings
+                    // Enable autoplay if it's disabled
+                    if (!originalAutoplay) {
+                        browser.tabs.executeScript(tab.id, {
+                            code: `
+                            var autoplayButton = document.querySelector('.ytp-autonav-toggle-button');
+                            if (autoplayButton && autoplayButton.getAttribute('aria-checked') === 'false') {
+                                autoplayButton.click();
+                            }
+                            `,
+                            runAt: "document_idle",
+                        });
+                    }
+                }
+            } else {
+                // The extension is not active, restore the original autoplay setting
+                browser.tabs.executeScript(tab.id, {
+                    code: `
+                    var autoplayButton = document.querySelector('.ytp-autonav-toggle-button');
+                    if (autoplayButton && autoplayButton.getAttribute('aria-checked') !== '${
+                        originalAutoplay ? "true" : "false"
+                    }') {
+                        autoplayButton.click();
+                    }
+                    `,
+                    runAt: "document_idle",
+                });
+            }
+        }
+    } catch (error) {
+        console.error("NoSpoiler: Failed to execute autoplay script at ", error);
+    }
+}

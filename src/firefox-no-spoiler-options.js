@@ -33,9 +33,10 @@ if (darkModeEnabled === "true") {
 }
 
 // ---------------------------- Settings ----------------------------
-// Get the hotkey input element, save button element, and notification element from the DOM
+// Get the hotkey input element, save button element, etc from the DOM
 const hotkeyInput = document.getElementById("hotkey");
 const saveButton = document.getElementById("save");
+const resetButton = document.getElementById("reset");
 const notification = document.getElementById("notification");
 const showVideoTimeCheckbox = document.getElementById("showVideoTime");
 const showProgressBarCheckbox = document.getElementById("showProgressBar");
@@ -58,7 +59,7 @@ async function updateHotkeyInputOnLoad() {
         const savedHotkey = await getSavedHotkey();
         updateHotkeyInput(savedHotkey);
     } catch (error) {
-        console.error("Error retrieving saved hotkey:", error);
+        console.error("NoSpoiler: Error retrieving saved hotkey at ", error);
         // Handle the error here if necessary
     }
 }
@@ -89,7 +90,7 @@ async function getSettings() {
 
         return settings;
     } catch (error) {
-        console.error("Error retrieving settings:", error);
+        console.error("NoSpoiler: Error retrieving settings at ", error);
         return {};
     }
 }
@@ -101,7 +102,7 @@ async function updateSettingsOnLoad() {
         const savedSettings = await getSettings();
         updateSettings(savedSettings);
     } catch (error) {
-        console.error("Error retrieving saved settings:", error);
+        console.error("NoSpoiler: Error retrieving saved settings at ", error);
         // Handle the error here if necessary
     }
 }
@@ -134,7 +135,7 @@ saveButton.addEventListener("click", async () => {
         // Save the hotkey&settings in storage and show a success notification
         saveHotkey(hotkeyValue);
         saveSettings(settings);
-        showNotification("Settings saved");
+        showNotification("Settings saved. Page reload may be needed.");
 
         // Send a message to the background script with the updated hotkey
         browser.runtime.sendMessage({ hotkeyValue });
@@ -148,6 +149,39 @@ saveButton.addEventListener("click", async () => {
         // If the hotkey is empty, show an error notification
         showNotification("Please enter a valid hotkey", true); // Add the "true" argument to make the notification red
     }
+});
+
+// Add a click event listener to the Reset button
+resetButton.addEventListener("click", async () => {
+    // Define default settings
+    const defaultSettings = {
+        showVideoTime: false,
+        showProgressBar: false,
+        showComments: false,
+        showDescription: false,
+        showRecommendations: false,
+        showEndcard: false,
+        enableAutoplay: false,
+    };
+
+    // Define default hotkey
+    const defaultHotkey = "Ctrl+Alt+U";
+    // Save the default settings and hotkey in storage
+    await saveSettings(defaultSettings);
+    await saveHotkey(defaultHotkey);
+
+    // Update the checkboxes and hotkey input field to reflect the default settings and hotkey
+    updateSettings(defaultSettings);
+    updateHotkeyInput(defaultHotkey);
+
+    // Show a success notification
+    showNotification("Settings reset to default. Page reload may be needed.");
+
+    // Update the command's shortcut
+    await browser.commands.update({
+        name: "toggle-addon",
+        shortcut: defaultHotkey,
+    });
 });
 
 // Function to format the hotkey based on pressed keys (Ctrl, Shift, Alt, Meta)
@@ -180,7 +214,7 @@ async function getSavedHotkey() {
 
         return savedHotkey;
     } catch (error) {
-        console.error("Error retrieving hotkey:", error);
+        console.error("NoSpoiler: Error retrieving hotkey at ", error);
         return "";
     }
 }
@@ -190,7 +224,7 @@ async function saveHotkey(noSpoilerHotkey) {
     try {
         await browser.storage.sync.set({ noSpoilerHotkey });
     } catch (error) {
-        console.error("Error saving hotkey:", error);
+        console.error("NoSpoiler: Error saving hotkey at ", error);
     }
 }
 
@@ -199,7 +233,7 @@ async function saveSettings(settings) {
     try {
         await browser.storage.sync.set(settings);
     } catch (error) {
-        console.error("Error saving settings:", error);
+        console.error("NoSpoiler: Error saving settings at ", error);
     }
 }
 

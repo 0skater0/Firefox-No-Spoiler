@@ -2,7 +2,10 @@
 
 Enhance focus with this Firefox addon: Hide YouTube video time, progress bar, comments, description, recommendations, autoplay and end-card. Enjoy distraction-free viewing. Fully customizable for a better experience.
 
-![Demo GIF](./demogif)
+## To-Do
+
+- Add demo gif ``![Demo GIF](./demogif)``
+- Changes made to the settings, whether saving new settings or resetting to default, should automatically trigger a reload of the add-on
 
 ## Features
 
