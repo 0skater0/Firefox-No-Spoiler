@@ -31,7 +31,7 @@ To access further customization options, simply right-click on the addon icon. T
 
 ### Manual
 
-1. Download the newes release under 'Releases'
+1. Download the newest '.xpi' release under [Releases](https://github.com/0skater0/Firefox-No-Spoiler/releases)
 2. In firefox navigate to 'about:addons' and press the gear icon.
 3. Choose 'Install addon from file' and select the downloaded file.
 
