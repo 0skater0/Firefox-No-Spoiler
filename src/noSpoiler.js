@@ -217,6 +217,7 @@ async function activate() {
 }
 
 // Deactivate the extension by removing the injected CSS code and updating the extension icon
+// Deactivate the extension by removing the injected CSS code and updating the extension icon
 async function deactivate() {
     if (activeCssCode) {
         // Remove the injected CSS code to restore default video display
@@ -235,7 +236,11 @@ async function deactivate() {
             32: "icons/YouTube-No-Spoiler-Off.png",
         },
     });
+
+    // Remove the skip buttons
+    browser.tabs.executeScript({ file: "skip-button.js", runAt: "document_idle" });
 }
+
 
 // Apply the CSS code based on the current activation status
 async function applyCSS() {

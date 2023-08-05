@@ -46,6 +46,7 @@ const showRecommendationsCheckbox = document.getElementById("showRecommendations
 const showChatCheckbox = document.getElementById("showChat");
 const showEndcardCheckbox = document.getElementById("showEndcard");
 const enableAutoplayCheckbox = document.getElementById("enableAutoplay");
+const enableSkipButtonsCheckbox = document.getElementById("enableSkipButtons");
 
 // Run the updateHotkeyInputOnLoad function once the DOM content is loaded
 document.addEventListener("DOMContentLoaded", () => {
@@ -77,9 +78,9 @@ async function getSettings() {
             "showChat",
             "showEndcard",
             "enableAutoplay",
+            "enableSkipButtons"
         ]);
 
-        // Use the retrieved settings
         const settings = {
             showVideoTime: data.showVideoTime || false,
             showProgressBar: data.showProgressBar || false,
@@ -88,6 +89,7 @@ async function getSettings() {
             showRecommendations: data.showRecommendations || false,
             showEndcard: data.showEndcard || false,
             enableAutoplay: data.enableAutoplay || false,
+            enableSkipButtons: data.enableSkipButtons || false
         };
 
         return settings;
@@ -132,6 +134,7 @@ saveButton.addEventListener("click", async () => {
         showChat: showChatCheckbox.checked,
         showEndcard: showEndcardCheckbox.checked,
         enableAutoplay: enableAutoplayCheckbox.checked,
+        enableSkipButtons: enableSkipButtonsCheckbox.checked
     };
 
     if (hotkeyValue) {
@@ -148,6 +151,8 @@ saveButton.addEventListener("click", async () => {
             name: "toggle-addon",
             shortcut: hotkeyValue,
         });
+
+        window.postMessage({ type: "SETTINGS_SAVED" }, "*");
     } else {
         // If the hotkey is empty, show an error notification
         showNotification("Please enter a valid hotkey", true); // Add the "true" argument to make the notification red
@@ -166,6 +171,7 @@ resetButton.addEventListener("click", async () => {
         showChat: false,
         showEndcard: false,
         enableAutoplay: false,
+        enableSkipButtons: false
     };
 
     // Define default hotkey
@@ -256,6 +262,7 @@ function updateSettings(settings) {
     showChatCheckbox.checked = settings.showChat;
     showEndcardCheckbox.checked = settings.showEndcard;
     enableAutoplayCheckbox.checked = settings.enableAutoplay;
+    enableSkipButtonsCheckbox.checked = settings.enableSkipButtons;  // Add this line
 }
 
 // Function to show a notification with the given message

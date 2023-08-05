@@ -1,0 +1,21 @@
+.noSpoilerSkipControls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+}
+
+.noSpoilerSkipControls .control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 23px;
+    padding: 7px;
+    cursor: pointer;
+}
+
+.noSpoilerSkipControls .control img {
+    object-fit: contain;
+    height: 100%;
+}

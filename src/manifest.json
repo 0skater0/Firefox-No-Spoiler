@@ -39,6 +39,14 @@
       "background.js"
     ]
   },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "css": ["skip-buttons.css"],
+      "js": ["skip-buttons.js"],
+      "run_at": "document_end"
+    }
+  ],
   "web_accessible_resources": [
     "icons/*.png",
     "styles.css"
