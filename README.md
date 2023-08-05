@@ -13,6 +13,7 @@ Enhance focus with this Firefox addon: Hide YouTube video time, progress bar, co
 - Hide/Show recommendations
 - Hide/Show endcard
 - Enable/disable autoplay
+- Skip and rewind buttons (-10 min, -5 min, +5 min, +10 min)
 
 ## Usage
 
