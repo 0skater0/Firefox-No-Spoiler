@@ -118,7 +118,7 @@ function createSkipButton(imgSrc, id, skipFunc) {
     var skipDiv = document.createElement("div");
     var img = document.createElement("img");
 
-    img.setAttribute("src", chrome.extension.getURL(`icons/${imgSrc}`));
+    img.setAttribute("src", browser.runtime.getURL(`icons/${imgSrc}`));  // Update this line
     img.setAttribute("class", "control");
     img.setAttribute("id", id);
 
