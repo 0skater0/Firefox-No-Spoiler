@@ -4,6 +4,7 @@ Enhance focus with this Firefox addon: Hide YouTube video time, progress bar, co
 
 ![Demo GIF](images/demo.gif)
 
+
 ## Features
 
 - Hide/Show video time
